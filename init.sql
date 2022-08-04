@@ -69,14 +69,14 @@ CREATE TABLE STAFF
 );
 CREATE TABLE ADMINS
 (
-    admin_id     INT,
-    CONSTRAINT fk_admin_id FOREIGN KEY (admin_id) REFERENCES STAFF(staff_id),
+    admin_id INT,
+    CONSTRAINT fk_admin_id FOREIGN KEY (admin_id) REFERENCES STAFF (staff_id),
     CONSTRAINT pk_admin_id PRIMARY KEY (admin_id)
 );
 CREATE TABLE EMPLOYEES
 (
-    employee_id   INT,
-    CONSTRAINT fk_employee_id FOREIGN KEY (employee_id) REFERENCES STAFF(staff_id),
+    employee_id INT,
+    CONSTRAINT fk_employee_id FOREIGN KEY (employee_id) REFERENCES STAFF (staff_id),
     CONSTRAINT pk_employee_id PRIMARY KEY (employee_id)
 );
 
@@ -98,8 +98,8 @@ CREATE TABLE ORDERS
     discount    FLOAT,
     amount_paid FLOAT     NOT NULL,
     CONSTRAINT pk_order_id PRIMARY KEY (order_id),
-    CONSTRAINT fk_customer_id FOREIGN KEY (customer_id) REFERENCES CUSTOMERS (customer_id),
-    CONSTRAINT fk_pet_id FOREIGN KEY (pet_id) REFERENCES PETS (pet_id),
-    CONSTRAINT fk_employee_id FOREIGN KEY (employee_id) REFERENCES EMPLOYEES (employee_id),
-    CONSTRAINT fk_service_id FOREIGN KEY (service_id) REFERENCES SERVICES (service_id)
+    CONSTRAINT fk_order_customer_id FOREIGN KEY (customer_id) REFERENCES CUSTOMERS (customer_id),
+    CONSTRAINT fk_order_pet_id FOREIGN KEY (pet_id) REFERENCES PETS (pet_id),
+    CONSTRAINT fk_order_employee_id FOREIGN KEY (employee_id) REFERENCES EMPLOYEES (employee_id),
+    CONSTRAINT fk_order_service_id FOREIGN KEY (service_id) REFERENCES SERVICES (service_id)
 );
