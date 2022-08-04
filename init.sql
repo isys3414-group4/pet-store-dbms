@@ -76,6 +76,7 @@ CREATE TABLE ADMINS
 CREATE TABLE EMPLOYEES
 (
     employee_id INT,
+    no_of_sales INT DEFAULT 0 NOT NULL,
     CONSTRAINT fk_employee_id FOREIGN KEY (employee_id) REFERENCES STAFF (staff_id),
     CONSTRAINT pk_employee_id PRIMARY KEY (employee_id)
 );
