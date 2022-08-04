@@ -31,7 +31,7 @@ CREATE TABLE PETS
     pet_name VARCHAR(50) NOT NULL,
     owner_id INT         NOT NULL,
     CONSTRAINT pk_pets_id PRIMARY KEY (pet_id),
-    FOREIGN KEY (owner_id) references CUSTOMERS (customer_id)
+    FOREIGN KEY (owner_id) references CUSTOMERS (customer_id) ON DELETE CASCADE
 );
 
 
@@ -70,14 +70,14 @@ CREATE TABLE STAFF
 CREATE TABLE ADMINS
 (
     admin_id INT,
-    CONSTRAINT fk_admin_id FOREIGN KEY (admin_id) REFERENCES STAFF (staff_id),
+    CONSTRAINT fk_admin_id FOREIGN KEY (admin_id) REFERENCES STAFF (staff_id) ON DELETE CASCADE,
     CONSTRAINT pk_admin_id PRIMARY KEY (admin_id)
 );
 CREATE TABLE EMPLOYEES
 (
     employee_id INT,
     no_of_sales INT DEFAULT 0 NOT NULL,
-    CONSTRAINT fk_employee_id FOREIGN KEY (employee_id) REFERENCES STAFF (staff_id),
+    CONSTRAINT fk_employee_id FOREIGN KEY (employee_id) REFERENCES STAFF (staff_id) ON DELETE CASCADE,
     CONSTRAINT pk_employee_id PRIMARY KEY (employee_id)
 );
 
