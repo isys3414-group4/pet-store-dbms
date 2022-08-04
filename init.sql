@@ -50,39 +50,33 @@ CREATE TABLE SERVICES
     CONSTRAINT pk_service_id PRIMARY KEY (service_id)
 );
 
-CREATE SEQUENCE seq_admins_id
+
+CREATE SEQUENCE seq_staff_id
     START WITH 1
     INCREMENT BY 1
     CACHE 10
     NOCYCLE;
 
-CREATE TABLE ADMINS
+CREATE TABLE STAFF
 (
-    admin_id     INT,
-    admin_name   VARCHAR(30) NOT NULL,
+    staff_id     INT,
+    staff_name   VARCHAR(30) NOT NULL,
     gender       VARCHAR(10) NOT NULL,
     phone_number VARCHAR(20) NOT NULL,
     email        VARCHAR(50),
     salary       FLOAT,
+    CONSTRAINT pk_staff_id PRIMARY KEY (staff_id)
+);
+CREATE TABLE ADMINS
+(
+    admin_id     INT,
+    CONSTRAINT fk_admin_id FOREIGN KEY (admin_id) REFERENCES STAFF(staff_id),
     CONSTRAINT pk_admin_id PRIMARY KEY (admin_id)
 );
-
-
-CREATE SEQUENCE seq_employees_id
-    START WITH 1
-    INCREMENT BY 1
-    CACHE 10
-    NOCYCLE;
-
 CREATE TABLE EMPLOYEES
 (
     employee_id   INT,
-    employee_name VARCHAR(30) NOT NULL,
-    gender        VARCHAR(10) NOT NULL,
-    phone_number  INT         NOT NULL,
-    email         VARCHAR(50),
-    no_of_sales   INT,
-    salary        FLOAT       NOT NULL,
+    CONSTRAINT fk_employee_id FOREIGN KEY (employee_id) REFERENCES STAFF(staff_id),
     CONSTRAINT pk_employee_id PRIMARY KEY (employee_id)
 );
 
