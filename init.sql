@@ -1,0 +1,111 @@
+CREATE SEQUENCE seq_customers_id
+    START WITH 1
+    INCREMENT BY 1
+    CACHE 10
+    NOCYCLE;
+
+CREATE TABLE CUSTOMERS
+(
+    customer_id    INT,
+    last_name      VARCHAR(10) NOT NULL,
+    first_name     VARCHAR(10) NOT NULL,
+    email          VARCHAR(50),
+    phone          VARCHAR(20) NOT NULL,
+    membership     NUMBER(1, 0), /* 1 - true, 0 - false */
+    royalty_points INT,
+    CONSTRAINT pk_customer_id PRIMARY KEY (customer_id)
+);
+
+
+CREATE SEQUENCE seq_pets_id
+    START WITH 1
+    INCREMENT BY 1
+    CACHE 10
+    NOCYCLE;
+
+CREATE TABLE PETS
+(
+    pet_id   INT,
+    gender   VARCHAR(10) NOT NULL,
+    species  VARCHAR(50) NOT NULL,
+    pet_name VARCHAR(50) NOT NULL,
+    owner_id INT         NOT NULL,
+    CONSTRAINT pk_pets_id PRIMARY KEY (pet_id),
+    FOREIGN KEY (owner_id) references CUSTOMERS (customer_id)
+);
+
+
+CREATE SEQUENCE seq_services_id
+    START WITH 1
+    INCREMENT BY 1
+    CACHE 10
+    NOCYCLE;
+
+CREATE TABLE SERVICES
+(
+    service_id          INT,
+    service_name        VARCHAR(20) NOT NULL,
+    service_description VARCHAR(200),
+    list_price          FLOAT       NOT NULL,
+    CONSTRAINT pk_service_id PRIMARY KEY (service_id)
+);
+
+CREATE SEQUENCE seq_admins_id
+    START WITH 1
+    INCREMENT BY 1
+    CACHE 10
+    NOCYCLE;
+
+CREATE TABLE ADMINS
+(
+    admin_id     INT,
+    admin_name   VARCHAR(30) NOT NULL,
+    gender       VARCHAR(10) NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
+    email        VARCHAR(50),
+    salary       FLOAT,
+    CONSTRAINT pk_admin_id PRIMARY KEY (admin_id)
+);
+
+
+CREATE SEQUENCE seq_employees_id
+    START WITH 1
+    INCREMENT BY 1
+    CACHE 10
+    NOCYCLE;
+
+CREATE TABLE EMPLOYEES
+(
+    employee_id   INT,
+    employee_name VARCHAR(30) NOT NULL,
+    gender        VARCHAR(10) NOT NULL,
+    phone_number  INT         NOT NULL,
+    email         VARCHAR(50),
+    no_of_sales   INT,
+    salary        FLOAT       NOT NULL,
+    CONSTRAINT pk_employee_id PRIMARY KEY (employee_id)
+);
+
+
+CREATE SEQUENCE seq_orders_id
+    START WITH 1
+    INCREMENT BY 1
+    CACHE 10
+    NOCYCLE;
+
+CREATE TABLE ORDERS
+(
+    order_id    INT,
+    date_time   TIMESTAMP NOT NULL,
+    customer_id INT       NOT NULL,
+    pet_id      INT       NOT NULL,
+    employee_id INT       NOT NULL,
+    service_id  INT       NOT NULL,
+    discount    FLOAT,
+    amount_paid FLOAT     NOT NULL,
+    CONSTRAINT pk_order_id PRIMARY KEY (order_id),
+    CONSTRAINT fk_customer_id FOREIGN KEY (customer_id) REFERENCES CUSTOMERS (customer_id),
+    CONSTRAINT fk_pet_id FOREIGN KEY (pet_id) REFERENCES PETS (pet_id),
+    CONSTRAINT fk_employee_id FOREIGN KEY (employee_id) REFERENCES EMPLOYEES (employee_id),
+    CONSTRAINT fk_service_id FOREIGN KEY (service_id) REFERENCES SERVICES (service_id)
+);
