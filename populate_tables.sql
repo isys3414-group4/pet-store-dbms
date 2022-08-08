@@ -43,3 +43,71 @@ FROM DUAL;
 
 
 
+/* Fill up PETS table */
+INSERT All
+    INTO PETS (pet_id, gender, species, pet_name, ownner_id)
+VALUES (seq_pets_id.nextval, 'Boy', 'Corgi', 'Bin', (SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Tuong' AND last_name = 'Vuong'))
+    INTO PETS (pet_id, gender, species, pet_name, ownner_id)
+VALUES (seq_pets_id.nextval, 'Girl', 'Husky', 'Bella',(SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Sehun' AND last_name = 'Oh'))
+    INTO PETS (pet_id, gender, species, pet_name, ownner_id)
+VALUES (seq_pets_id.nextval, 'Girl', 'American Shorthair Cat', 'Nala',(SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Taylor' AND last_name = 'Swift'))
+    INTO PETS (pet_id, gender, species, pet_name, ownner_id)
+VALUES (seq_pet_id.nextval, 'Boy', 'Bombay Cat', 'Leo', (SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Huan' AND last_name = 'Ngo'))
+    INTO PETS (pet_id, gender, species, pet_name, ownner_id)
+VALUES (seq_pet_id.nextval, 'Girl', 'Bull Dog', 'Kitty', (SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Edogawa' AND last_name = 'Conan'))
+    INTO PETS (pet_id, gender, species, pet_name, ownner_id)
+VALUES (seq_pet_id.nextval, 'Boy', 'Poodle', 'Charlie', (SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Tony' AND last_name = 'Stark'))
+    INTO PETS (pet_id, gender, species, pet_name, ownner_id)
+VALUES (seq_pet_id.nextval, 'Boy', 'Bengal Cat', 'Teddy', (SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Satoru' AND last_name = 'Gojo'))
+    INTO PETS (pet_id, gender, species, pet_name, ownner_id)
+VALUES (seq_pet_id.nextval, 'Girl', 'Golden', 'Max', (SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Qui' AND last_name = 'Nguyen'))
+    INTO PETS (pet_id, gender, species, pet_name, ownner_id)
+VALUES (seq_pet_id.nextval, 'Boy', 'Chihuahua', 'Loki', (SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Thor' AND last_name = 'Odison'))
+    INTO PETS (pet_id, gender, species, pet_name, ownner_id)
+VALUES (seq_pet_id.nextval, 'Girl', 'Bengal Cat', 'Chloe', (SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Hien' AND last_name = 'Tran'))
+SELECT 1
+From DUAL;
+
+/* Full up STAFF table */
+INSERT All
+    INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
+VALUES (seq_staff_id.nextval, 'Tin Tran', 'Male', '0866364551', 'tintran099@gmail.com', 8600000)
+    INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
+VALUES (seq_staff_id.nextval, 'Trong Huynh', 'Male', '0377723461', 'tronghuynh377@gmail.com', 9000000)
+    INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
+VALUES (seq_staff_id.nextval, 'Minh Le', 'Male', '0987863521', 'sadboyachau112@gmail.com', 86000000)
+    INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
+VALUES (seq_staff_id.nextval, 'Ngoc Nguyen', 'Female', '0326975245', NULL, 90000000)
+    INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
+VALUES (seq_staff_id.nextval, 'Thy Dam', 'Female', '0979631357', NULL, 12000000)
+    INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
+VALUES (seq_staff_id.nextval, 'Som Pham', 'Male', '0965133242', 'contimdaudon666@gmail.com', 9000000)
+    INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
+VALUES (seq_staff_id.nextval, 'Phuoc Nguyen', 'Male', '0397744123', 'phuocnguyen787@gmail.com', 11000000)
+    INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
+VALUES (seq_staff_id.nextval, 'Tien Ly', 'Female', '0328654210', 'tienly1907@gmail.com', 11000000)
+SELECT 1
+From DUAL;
+
+/*Fill up ADMINS table */
+INSERT All
+    INTO ADMINS (admin_id)
+VALUES (SELECT staff_id FROM STAFF WHERE staff_name = 'Thy Dam')
+    INTO ADMINS (admin_id)
+VALUES (SELECT staff_id FROM STAFF WHERE staff_name = 'Phuoc Nguyen')
+    INTO ADMINS (admin_id)
+VALUES (SELECT staff_id FROM STAFF WHERE staff_name = 'Tien LY');
+
+/* Fill up EMLOYEE table */
+INSERT All
+    INTO EMPLOYEES (employee_id, no_of_sale)
+VALUES (SELECT staff_id FROM STAFF WHERE staff_name = 'Tin Tran', 5)
+    INTO EMPLOYEES (employee_id, no_of_sale)
+VALUES (SELECT staff_id FROM STAFF WHERE staff_name = 'Trong Huynh', 10)
+    INTO EMPLOYEE (employee_id, no_of_sale)
+VALUES (SELECT staff_id FROM STAFF WHERE staff_name = 'Minh LE', NUll)
+    INTO EMPLOYEES (employee_id, no_of_sale)
+VALUES (SELECT staff_id FROM STAFF WHERE staff_name = 'Ngoc Nguyen', 8)
+    INTO EMPLOYEE (employee_id, no_of_sale)
+VALUES (SELECT staff_id FROM STAFF WHERE staff_name = 'Son Pham', 7);
+
