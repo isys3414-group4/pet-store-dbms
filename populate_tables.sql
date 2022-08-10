@@ -112,7 +112,7 @@ WHERE staff_name = 'Trong Huynh';
 
 INSERT INTO EMPLOYEES (employee_id, no_of_sales)
 SELECT staff_id,
-       NUll
+       12
 FROM STAFF
 WHERE staff_name = 'Minh Le';
 
@@ -129,23 +129,23 @@ FROM STAFF
 WHERE staff_name = 'Son Pham';
 
 /* Fill up ORDERS table */
-INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
-VALUES(seq_orders_id.nextval, '2022-08-26 02:15:30.11',  )
-INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
-VALUES(seq_orders_id.nextval)
-INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
-VALUES(seq_orders_id.nextval)
-INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
-VALUES(seq_orders_id.nextval)
-INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
-VALUES(seq_orders_id.nextval)
-INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
-VALUES(seq_orders_id.nextval)
-INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
-VALUES(seq_orders_id.nextval)
-INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
-VALUES(seq_orders_id.nextval)
-INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
-VALUES(seq_orders_id.nextval)
-INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
-VALUES(seq_orders_id.nextval)
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id)
+VALUES(seq_orders_id.nextval, '2022-07-29 08:15:30.11', 7, 12, 2, 1, 0)
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id)
+VALUES(seq_orders_id.nextval, '2022-07-30 13:02:45.23', 10, 3, 6, 3)
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id)
+VALUES(seq_orders_id.nextval, '2022-07-31 09:15:20.20', 2, 1, 3, 5, )
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id)
+VALUES(seq_orders_id.nextval, '2022-08-01 12:20:32.12', 7, 12, 3, 5,)
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id)
+VALUES(seq_orders_id.nextval, '2022-08-01 14:35:30.40', 9, 8, 1, 6, )
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id)
+VALUES(seq_orders_id.nextval, '2022-08-01 15:30:45.24', 3, 11, 4, 4, )
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id)
+VALUES(seq_orders_id.nextval, '2022-08-02 10:46:56.12', 5, 9, 3, 2,)
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id)
+VALUES(seq_orders_id.nextval, '2022-08-03 14:20:23.50', 7, 12, 1, 1, )
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id)
+VALUES(seq_orders_id.nextval, '2022-08-04 08:15:19.20', 8, 6, 3, 5, )
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id)
+VALUES(seq_orders_id.nextval, '2022-08-04 13:15:12.20', 4, 10, 4, 1, )
