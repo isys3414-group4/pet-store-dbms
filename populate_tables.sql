@@ -39,27 +39,29 @@ INSERT INTO SERVICES (service_id, service_name, service_description, list_price)
 
 /* Fill up PETS table */
 INSERT INTO PETS (pet_id, gender, species, pet_name, owner_id)
-    VALUES (seq_pets_id.nextval, 'Boy', 'Corgi', 'Bin', (SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Tuong' AND last_name = 'Vuong'));
+    VALUES (seq_pets_id.nextval, 'Boy', 'Corgi', 'Bin', 2);
 INSERT INTO PETS (pet_id, gender, species, pet_name, owner_id)
-    VALUES (seq_pets_id.nextval, 'Girl', 'Husky', 'Bella',(SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Sehun' AND last_name = 'Oh'));
+    VALUES (seq_pets_id.nextval, 'Girl', 'Husky', 'Bella', 6);
 INSERT INTO PETS (pet_id, gender, species, pet_name, owner_id)
-    VALUES (seq_pets_id.nextval, 'Girl', 'American Shorthair Cat', 'Nala',(SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Taylor' AND last_name = 'Swift'));
+    VALUES (seq_pets_id.nextval, 'Girl', 'American Shorthair Cat', 'Nala', 10);
 INSERT INTO PETS (pet_id, gender, species, pet_name, owner_id)
-    VALUES (seq_pets_id.nextval, 'Boy', 'Bombay Cat', 'Leo', (SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Huan' AND last_name = 'Ngo'));
+    VALUES (seq_pets_id.nextval, 'Boy', 'Bombay Cat', 'Leo', 2);
 INSERT INTO PETS (pet_id, gender, species, pet_name, owner_id)
-    VALUES (seq_pets_id.nextval, 'Girl', 'Bull Dog', 'Kitty', (SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Edogawa' AND last_name = 'Conan'));
+    VALUES (seq_pets_id.nextval, 'Girl', 'Bull Dog', 'Kitty', 1);
 INSERT INTO PETS (pet_id, gender, species, pet_name, owner_id)
-    VALUES (seq_pets_id.nextval, 'Boy', 'Poodle', 'Charlie', (SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Tony' AND last_name = 'Stark'));
+    VALUES (seq_pets_id.nextval, 'Boy', 'Poodle', 'Charlie', 8);
 INSERT INTO PETS (pet_id, gender, species, pet_name, owner_id)
-    VALUES (seq_pets_id.nextval, 'Boy', 'Bengal Cat', 'Teddy', (SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Satoru' AND last_name = 'Gojo'));
+    VALUES (seq_pets_id.nextval, 'Boy', 'Bengal Cat', 'Teddy', 7);
 INSERT INTO PETS (pet_id, gender, species, pet_name, owner_id)
-    VALUES (seq_pets_id.nextval, 'Girl', 'Golden', 'Max', (SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Qui' AND last_name = 'Nguyen'));
+    VALUES (seq_pets_id.nextval, 'Girl', 'Golden', 'Max', 9);
 INSERT INTO PETS (pet_id, gender, species, pet_name, owner_id)
-    VALUES (seq_pets_id.nextval, 'Boy', 'Chihuahua', 'Loki', (SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Thor' AND last_name = 'Odison'));
+    VALUES (seq_pets_id.nextval, 'Boy', 'Chihuahua', 'Loki', 5);
 INSERT INTO PETS (pet_id, gender, species, pet_name, owner_id)
-    VALUES (seq_pets_id.nextval, 'Girl', 'Bengal Cat', 'Chloe', (SELECT customer_id FROM CUSTOMERS WHERE first_name = 'Hien' AND last_name = 'Tran'));
-
-
+    VALUES (seq_pets_id.nextval, 'Girl', 'Bengal Cat', 'Chloe', 4);
+INSERT INTO PETS (pet_id, gender, species, pet_name, owner_id)
+    VALUES (seq_pets_id.nextval, 'Boy', 'Corgi', 'Lucky', 3);
+INSERT INTO PETS (pet_id, gender, species, pet_name, owner_id)
+    VALUES (seq_pets_id.nextval, 'Girl', 'British Longhair', 'Mina', 7);
 /* Full up STAFF table */
 INSERT INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
     VALUES (seq_staff_id.nextval, 'Tin Tran', 'Male', '0866364551', 'tintran099@gmail.com', 8600000);
@@ -127,4 +129,23 @@ FROM STAFF
 WHERE staff_name = 'Son Pham';
 
 /* Fill up ORDERS table */
-INSERT INTO 
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
+VALUES(seq_orders_id.nextval, '2022-08-26 02:15:30.11',  )
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
+VALUES(seq_orders_id.nextval)
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
+VALUES(seq_orders_id.nextval)
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
+VALUES(seq_orders_id.nextval)
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
+VALUES(seq_orders_id.nextval)
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
+VALUES(seq_orders_id.nextval)
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
+VALUES(seq_orders_id.nextval)
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
+VALUES(seq_orders_id.nextval)
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
+VALUES(seq_orders_id.nextval)
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, discount, amount_paid)
+VALUES(seq_orders_id.nextval)
