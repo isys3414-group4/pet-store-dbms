@@ -16,7 +16,7 @@ VALUES (seq_customers_id.nextval, 'Satoru', 'Gojo', 'rubik@gmail.com', '02923336
 INSERT INTO CUSTOMERS (customer_id, first_name, last_name, email, phone, membership, royalty_points)
 VALUES (seq_customers_id.nextval, 'Qui', 'Nguyen', NULL, '0226175888', 1, 110);
 INSERT INTO CUSTOMERS (customer_id, first_name, last_name, email, phone, membership, royalty_points)
-VALUES (seq_customers_id.nextval, 'Thor', 'Odison', NULL, '0226175827', 1, 12);
+VALUES (seq_customers_id.nextval, 'Thor', 'Odinson', NULL, '0226175827', 1, 12);
 INSERT INTO CUSTOMERS (customer_id, first_name, last_name, email, phone, membership, royalty_points)
 VALUES (seq_customers_id.nextval, 'Hien', 'Tran', 'cuca@gmail.com', '0925686222', 1, 80);
 
