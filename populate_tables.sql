@@ -131,7 +131,7 @@ INSERT INTO EMPLOYEES (employee_id, no_of_sales)
 SELECT staff_id,
        7
 FROM STAFF
-WHERE staff_name = 'Son Pham';
+WHERE staff_name = 'Som Pham';
 
 
 /* Fill up ORDERS table */
