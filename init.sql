@@ -16,8 +16,10 @@ CREATE TABLE CUSTOMERS
     membership     NUMBER(1, 0), /* 1 - true, 0 - false */
     royalty_points INT,
     CONSTRAINT pk_customer_id PRIMARY KEY (customer_id),
-    CONSTRAINT chk_optional_contact CHECK (email IS NOT NULL OR phone IS NOT NULL),
-    CONSTRAINT chk_membership_points CHECK (
+    CONSTRAINT chk_customer_optional_contact CHECK (email IS NOT NULL OR phone IS NOT NULL),
+    CONSTRAINT regex_customer_email CHECK ( REGEXP_LIKE(email, '') ),
+    CONSTRAINT regex_customer_phone CHECK ( REGEXP_LIKE(phone, '') ),
+    CONSTRAINT chk_customer_membership_points CHECK (
             (membership = 0 AND royalty_points IS NULL) OR
             (membership = 1 AND royalty_points IS NOT NULL)
         )
@@ -72,13 +74,15 @@ CREATE SEQUENCE seq_staff_id
 
 CREATE TABLE STAFF
 (
-    staff_id     INT,
-    staff_name   VARCHAR(30) NOT NULL,
-    gender       VARCHAR(10) NOT NULL,
-    phone_number VARCHAR(20) NOT NULL,
-    email        VARCHAR(50),
-    salary       FLOAT,
-    CONSTRAINT pk_staff_id PRIMARY KEY (staff_id)
+    staff_id   INT,
+    staff_name VARCHAR(30) NOT NULL,
+    gender     VARCHAR(10) NOT NULL,
+    phone      VARCHAR(20) NOT NULL,
+    email      VARCHAR(50),
+    salary     FLOAT,
+    CONSTRAINT pk_staff_id PRIMARY KEY (staff_id),
+    CONSTRAINT regex_customer_email CHECK ( REGEXP_LIKE(email, '') ),
+    CONSTRAINT regex_customer_phone CHECK ( REGEXP_LIKE(phone, '') )
 );
 CREATE TABLE ADMINS
 (
