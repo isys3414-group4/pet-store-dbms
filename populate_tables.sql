@@ -71,21 +71,21 @@ VALUES (seq_pets_id.nextval, 'Girl', 'British Longhair', 'Mina', 7);
 
 -- -------------------
 -- Full up STAFF table
-INSERT INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
+INSERT INTO STAFF (staff_id, staff_name, gender, phone, email, salary)
 VALUES (seq_staff_id.nextval, 'Tin Tran', 'Male', '0866364551', 'tintran099@gmail.com', 8600000);
-INSERT INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
+INSERT INTO STAFF (staff_id, staff_name, gender, phone, email, salary)
 VALUES (seq_staff_id.nextval, 'Trong Huynh', 'Male', '0377723461', 'tronghuynh377@gmail.com', 9000000);
-INSERT INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
+INSERT INTO STAFF (staff_id, staff_name, gender, phone, email, salary)
 VALUES (seq_staff_id.nextval, 'Minh Le', 'Male', '0987863521', 'sadboyachau112@gmail.com', 86000000);
-INSERT INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
+INSERT INTO STAFF (staff_id, staff_name, gender, phone, email, salary)
 VALUES (seq_staff_id.nextval, 'Ngoc Nguyen', 'Female', '0326975245', NULL, 90000000);
-INSERT INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
+INSERT INTO STAFF (staff_id, staff_name, gender, phone, email, salary)
 VALUES (seq_staff_id.nextval, 'Thy Dam', 'Female', '0979631357', NULL, 12000000);
-INSERT INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
+INSERT INTO STAFF (staff_id, staff_name, gender, phone, email, salary)
 VALUES (seq_staff_id.nextval, 'Som Pham', 'Male', '0965133242', 'contimdaudon666@gmail.com', 9000000);
-INSERT INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
+INSERT INTO STAFF (staff_id, staff_name, gender, phone, email, salary)
 VALUES (seq_staff_id.nextval, 'Phuoc Nguyen', 'Male', '0397744123', 'phuocnguyen787@gmail.com', 11000000);
-INSERT INTO STAFF (staff_id, staff_name, gender, phone_number, email, salary)
+INSERT INTO STAFF (staff_id, staff_name, gender, phone, email, salary)
 VALUES (seq_staff_id.nextval, 'Tien Ly', 'Female', '0328654210', 'tienly1907@gmail.com', 11000000);
 
 
