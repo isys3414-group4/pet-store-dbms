@@ -40,7 +40,7 @@ CREATE TABLE PETS
     pet_name VARCHAR(50) NOT NULL,
     owner_id INT         NOT NULL,
     CONSTRAINT pk_pets_id PRIMARY KEY (pet_id),
-    FOREIGN KEY (owner_id) references CUSTOMERS (customer_id) ON DELETE CASCADE
+    FOREIGN KEY (owner_id) REFERENCES CUSTOMERS (customer_id) ON DELETE CASCADE
 );
 
 
