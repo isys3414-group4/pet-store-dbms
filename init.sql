@@ -12,10 +12,11 @@ CREATE TABLE CUSTOMERS
     last_name      VARCHAR(10) NOT NULL,
     first_name     VARCHAR(10) NOT NULL,
     email          VARCHAR(50),
-    phone          VARCHAR(20) NOT NULL,
+    phone          VARCHAR(20),
     membership     NUMBER(1, 0),  /* 1 - true, 0 - false */
     royalty_points INT,
-    CONSTRAINT pk_customer_id PRIMARY KEY (customer_id)
+    CONSTRAINT pk_customer_id PRIMARY KEY (customer_id),
+    CONSTRAINT optional_contact CHECK (email IS NOT NULL OR phone IS NOT NULL)
 );
 
 
