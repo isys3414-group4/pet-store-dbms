@@ -13,10 +13,14 @@ CREATE TABLE CUSTOMERS
     first_name     VARCHAR(10) NOT NULL,
     email          VARCHAR(50),
     phone          VARCHAR(20),
-    membership     NUMBER(1, 0),  /* 1 - true, 0 - false */
+    membership     NUMBER(1, 0), /* 1 - true, 0 - false */
     royalty_points INT,
     CONSTRAINT pk_customer_id PRIMARY KEY (customer_id),
-    CONSTRAINT optional_contact CHECK (email IS NOT NULL OR phone IS NOT NULL)
+    CONSTRAINT chk_optional_contact CHECK (email IS NOT NULL OR phone IS NOT NULL),
+    CONSTRAINT chk_membership_points CHECK (
+            (membership = 0 AND royalty_points IS NULL) OR
+            (membership = 1 AND royalty_points IS NOT NULL)
+        )
 );
 
 
@@ -109,7 +113,7 @@ CREATE TABLE ORDERS
     service_id  INT       NOT NULL,
     price       INT       NOT NULL,
     discount    FLOAT,
-    amount_paid FLOAT  GENERATED ALWAYS AS (price - discount),
+    amount_paid FLOAT GENERATED ALWAYS AS (price - discount),
     CONSTRAINT pk_order_id PRIMARY KEY (order_id),
     CONSTRAINT fk_order_customer_id FOREIGN KEY (customer_id) REFERENCES CUSTOMERS (customer_id),
     CONSTRAINT fk_order_pet_id FOREIGN KEY (pet_id) REFERENCES PETS (pet_id),
