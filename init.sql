@@ -16,9 +16,9 @@ CREATE TABLE CUSTOMERS
     membership     NUMBER(1, 0), /* 1 - true, 0 - false */
     royalty_points INT,
     CONSTRAINT pk_customer_id PRIMARY KEY (customer_id),
+    CONSTRAINT regex_customer_email CHECK ( REGEXP_LIKE(email, '^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$') OR email IS NULL ),
+    CONSTRAINT regex_customer_phone CHECK ( REGEXP_LIKE(phone, '^[0-9+]{4,}$') OR phone IS NULL ),
     CONSTRAINT chk_customer_optional_contact CHECK (email IS NOT NULL OR phone IS NOT NULL),
-    CONSTRAINT regex_customer_email CHECK ( REGEXP_LIKE(email, '^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$') ),
-    CONSTRAINT regex_customer_phone CHECK ( REGEXP_LIKE(phone, '^[0-9+]{4,}$') ),
     CONSTRAINT chk_customer_membership_points CHECK (
             (membership = 0 AND royalty_points IS NULL) OR
             (membership = 1 AND royalty_points IS NOT NULL)
@@ -81,8 +81,8 @@ CREATE TABLE STAFF
     email      VARCHAR(50),
     salary     FLOAT,
     CONSTRAINT pk_staff_id PRIMARY KEY (staff_id),
-    CONSTRAINT regex_staff_email CHECK ( REGEXP_LIKE(email, '^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$') ),
-    CONSTRAINT regex_staff_phone CHECK ( REGEXP_LIKE(phone, '^[0-9+]{4,}$') )
+    CONSTRAINT regex_staff_phone CHECK ( REGEXP_LIKE(phone, '^[0-9+]{4,}$') ),
+    CONSTRAINT regex_staff_email CHECK ( REGEXP_LIKE(email, '^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$') OR email IS NULL )
 );
 CREATE TABLE ADMINS
 (
