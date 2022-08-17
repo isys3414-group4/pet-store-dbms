@@ -1,3 +1,5 @@
+-- ---------------------
+-- CUSTOMERS table schema
 CREATE SEQUENCE seq_customers_id
     START WITH 1
     INCREMENT BY 1
@@ -17,6 +19,8 @@ CREATE TABLE CUSTOMERS
 );
 
 
+-- -----------------
+-- PETS table schema
 CREATE SEQUENCE seq_pets_id
     START WITH 1
     INCREMENT BY 1
@@ -35,6 +39,8 @@ CREATE TABLE PETS
 );
 
 
+-- ---------------------
+-- SERVICES table schema
 CREATE SEQUENCE seq_services_id
     START WITH 1
     INCREMENT BY 1
@@ -51,6 +57,8 @@ CREATE TABLE SERVICES
 );
 
 
+-- ----------------------------------------
+-- STAFF, ADMINS and EMPLOYEES table schema
 CREATE SEQUENCE seq_staff_id
     START WITH 1
     INCREMENT BY 1
@@ -82,6 +90,8 @@ CREATE TABLE EMPLOYEES
 );
 
 
+-- -------------------
+-- ORDERS table schema
 CREATE SEQUENCE seq_orders_id
     START WITH 1
     INCREMENT BY 1
