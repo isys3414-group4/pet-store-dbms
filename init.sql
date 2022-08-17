@@ -111,7 +111,7 @@ CREATE TABLE ORDERS
     pet_id      INT       NOT NULL,
     employee_id INT       NOT NULL,
     service_id  INT       NOT NULL,
-    price       INT       NOT NULL,
+    price       FLOAT     NOT NULL,
     discount    FLOAT,
     amount_paid FLOAT GENERATED ALWAYS AS (price - discount),
     CONSTRAINT pk_order_id PRIMARY KEY (order_id),
