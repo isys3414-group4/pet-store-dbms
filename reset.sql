@@ -1,4 +1,5 @@
-/* Delete tables */
+----------------
+-- Delete tables
 BEGIN
    EXECUTE IMMEDIATE 'DROP TABLE ' || 'ORDERS';
 EXCEPTION
@@ -61,10 +62,11 @@ EXCEPTION
          RAISE;
       END IF;
 END;
-/* End of delete tables */
+-- End of delete tables
 
 
-/* Delete sequences */
+-------------------
+-- Delete sequences
 BEGIN
    EXECUTE IMMEDIATE 'DROP SEQUENCE ' || 'SEQ_CUSTOMERS_ID';
 EXCEPTION
@@ -109,4 +111,4 @@ EXCEPTION
          RAISE;
       END IF;
 END;
-/* End of delete sequences */
+-- End of delete sequences

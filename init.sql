@@ -1,3 +1,5 @@
+-- ---------------------
+-- CUSTOMERS table schema
 CREATE SEQUENCE seq_customers_id
     START WITH 1
     INCREMENT BY 1
@@ -10,13 +12,22 @@ CREATE TABLE CUSTOMERS
     last_name      VARCHAR(10) NOT NULL,
     first_name     VARCHAR(10) NOT NULL,
     email          VARCHAR(50),
-    phone          VARCHAR(20) NOT NULL,
+    phone          VARCHAR(20),
     membership     NUMBER(1, 0), /* 1 - true, 0 - false */
     royalty_points INT,
-    CONSTRAINT pk_customer_id PRIMARY KEY (customer_id)
+    CONSTRAINT pk_customer_id PRIMARY KEY (customer_id),
+    CONSTRAINT regex_customer_email CHECK ( REGEXP_LIKE(email, '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$') OR email IS NULL ),
+    CONSTRAINT regex_customer_phone CHECK ( REGEXP_LIKE(phone, '^\+?[0-9]{4,}$') OR phone IS NULL ),
+    CONSTRAINT chk_customer_optional_contact CHECK (email IS NOT NULL OR phone IS NOT NULL),
+    CONSTRAINT chk_customer_membership_points CHECK (
+            (membership = 0 AND royalty_points IS NULL) OR
+            (membership = 1 AND royalty_points IS NOT NULL)
+        )
 );
 
 
+-- -----------------
+-- PETS table schema
 CREATE SEQUENCE seq_pets_id
     START WITH 1
     INCREMENT BY 1
@@ -31,10 +42,12 @@ CREATE TABLE PETS
     pet_name VARCHAR(50) NOT NULL,
     owner_id INT         NOT NULL,
     CONSTRAINT pk_pets_id PRIMARY KEY (pet_id),
-    FOREIGN KEY (owner_id) references CUSTOMERS (customer_id) ON DELETE CASCADE
+    FOREIGN KEY (owner_id) REFERENCES CUSTOMERS (customer_id) ON DELETE CASCADE
 );
 
 
+-- ---------------------
+-- SERVICES table schema
 CREATE SEQUENCE seq_services_id
     START WITH 1
     INCREMENT BY 1
@@ -51,6 +64,8 @@ CREATE TABLE SERVICES
 );
 
 
+-- ----------------------------------------
+-- STAFF, ADMINS and EMPLOYEES table schema
 CREATE SEQUENCE seq_staff_id
     START WITH 1
     INCREMENT BY 1
@@ -59,13 +74,15 @@ CREATE SEQUENCE seq_staff_id
 
 CREATE TABLE STAFF
 (
-    staff_id     INT,
-    staff_name   VARCHAR(30) NOT NULL,
-    gender       VARCHAR(10) NOT NULL,
-    phone_number VARCHAR(20) NOT NULL,
-    email        VARCHAR(50),
-    salary       FLOAT,
-    CONSTRAINT pk_staff_id PRIMARY KEY (staff_id)
+    staff_id   INT,
+    staff_name VARCHAR(30) NOT NULL,
+    gender     VARCHAR(10) NOT NULL,
+    phone      VARCHAR(20) NOT NULL,
+    email      VARCHAR(50),
+    salary     FLOAT,
+    CONSTRAINT pk_staff_id PRIMARY KEY (staff_id),
+    CONSTRAINT regex_staff_phone CHECK ( REGEXP_LIKE(phone, '^\+?[0-9]{4,}$') ),
+    CONSTRAINT regex_staff_email CHECK ( REGEXP_LIKE(email, '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$') OR email IS NULL )
 );
 CREATE TABLE ADMINS
 (
@@ -82,6 +99,8 @@ CREATE TABLE EMPLOYEES
 );
 
 
+-- -------------------
+-- ORDERS table schema
 CREATE SEQUENCE seq_orders_id
     START WITH 1
     INCREMENT BY 1
@@ -96,9 +115,9 @@ CREATE TABLE ORDERS
     pet_id      INT       NOT NULL,
     employee_id INT       NOT NULL,
     service_id  INT       NOT NULL,
-    price       INT       NOT NULL,
+    price       FLOAT     NOT NULL,
     discount    FLOAT,
-    amount_paid FLOAT  GENERATED ALWAYS AS (price - discount),
+    amount_paid FLOAT GENERATED ALWAYS AS (price - discount),
     CONSTRAINT pk_order_id PRIMARY KEY (order_id),
     CONSTRAINT fk_order_customer_id FOREIGN KEY (customer_id) REFERENCES CUSTOMERS (customer_id),
     CONSTRAINT fk_order_pet_id FOREIGN KEY (pet_id) REFERENCES PETS (pet_id),
