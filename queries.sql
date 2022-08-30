@@ -9,7 +9,7 @@ SELECT C.customer_id,
        COUNT(O.order_id) AS orders
 FROM CUSTOMERS C,
      ORDERS O
-WHERE C.customer_id = O.customer_id
+WHERE C.customer_id = O.customer_id AND ROWNUM <= 5
 GROUP BY C.customer_id, C.first_name, C.last_name, C.email, C.phone, C.membership, C.royalty_points
 ORDER BY orders DESC;
 
