@@ -122,7 +122,8 @@ CREATE TABLE ORDERS
     CONSTRAINT fk_order_customer_id FOREIGN KEY (customer_id) REFERENCES CUSTOMERS (customer_id),
     CONSTRAINT fk_order_pet_id FOREIGN KEY (pet_id) REFERENCES PETS (pet_id),
     CONSTRAINT fk_order_employee_id FOREIGN KEY (employee_id) REFERENCES EMPLOYEES (employee_id),
-    CONSTRAINT fk_order_service_id FOREIGN KEY (service_id) REFERENCES SERVICES (service_id)
+    CONSTRAINT fk_order_service_id FOREIGN KEY (service_id) REFERENCES SERVICES (service_id),
+    CONSTRAINT fk_order_price FOREIGN KEY (price) REFERENCES SERVICES (list_price)
 );
 
 
