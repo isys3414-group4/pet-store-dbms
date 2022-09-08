@@ -119,10 +119,10 @@ CREATE TABLE ORDERS
     discount    FLOAT,
     amount_paid FLOAT GENERATED ALWAYS AS (price - discount),
     CONSTRAINT pk_order_id PRIMARY KEY (order_id),
-    CONSTRAINT fk_order_customer_id FOREIGN KEY (customer_id) REFERENCES CUSTOMERS (customer_id),
-    CONSTRAINT fk_order_pet_id FOREIGN KEY (pet_id) REFERENCES PETS (pet_id),
-    CONSTRAINT fk_order_employee_id FOREIGN KEY (employee_id) REFERENCES EMPLOYEES (employee_id),
-    CONSTRAINT fk_order_service_id FOREIGN KEY (service_id) REFERENCES SERVICES (service_id)
+    CONSTRAINT fk_order_customer_id FOREIGN KEY (customer_id) REFERENCES CUSTOMERS (customer_id) ON DELETE CASCADE,
+    CONSTRAINT fk_order_pet_id FOREIGN KEY (pet_id) REFERENCES PETS (pet_id) ON DELETE CASCADE,
+    CONSTRAINT fk_order_employee_id FOREIGN KEY (employee_id) REFERENCES EMPLOYEES (employee_id) ON DELETE CASCADE,
+    CONSTRAINT fk_order_service_id FOREIGN KEY (service_id) REFERENCES SERVICES (service_id) ON DELETE CASCADE
 );
 
 
