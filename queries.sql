@@ -59,3 +59,15 @@ SELECT TO_CHAR(O.date_time, 'fmDay') AS weekday, COUNT(DISTINCT O.order_id) AS n
 FROM ORDERS O
 GROUP BY TO_CHAR(O.date_time, 'fmDay'), MOD(TO_CHAR(O.date_time, 'D') + 5, 7)
 ORDER BY MOD(TO_CHAR(O.date_time, 'D') + 5, 7);
+
+-- Staff: Gender proportion
+SELECT S.GENDER, COUNT(*) AS quantity
+FROM EMPLOYEES E, STAFF S
+WHERE E.EMPLOYEE_ID = S.STAFF_ID
+GROUP BY gender;
+
+-- Staff: Staff that has salary above average
+SELECT S.staff_name, S.salary
+FROM STAFF S
+WHERE S.salary >= (SELECT AVG(salary)
+                  FROM STAFF)
