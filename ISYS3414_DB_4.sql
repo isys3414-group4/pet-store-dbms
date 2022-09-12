@@ -16,7 +16,8 @@ CREATE TABLE CUSTOMERS
     membership     NUMBER(1, 0), /* 1 - true, 0 - false */
     royalty_points INT,
     CONSTRAINT pk_customer_id PRIMARY KEY (customer_id),
-    CONSTRAINT regex_customer_email CHECK ( REGEXP_LIKE(email, '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$') OR email IS NULL ),
+    CONSTRAINT regex_customer_email CHECK ( REGEXP_LIKE(email, '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$') OR
+                                            email IS NULL ),
     CONSTRAINT regex_customer_phone CHECK ( REGEXP_LIKE(phone, '^\+?[0-9]{4,}$') OR phone IS NULL ),
     CONSTRAINT chk_customer_optional_contact CHECK (email IS NOT NULL OR phone IS NOT NULL),
     CONSTRAINT chk_customer_membership_points CHECK (
@@ -66,36 +67,40 @@ CREATE TABLE SERVICES
 
 -- ----------------------------------------
 -- STAFF, ADMINS and EMPLOYEES table schema
-CREATE SEQUENCE seq_staff_id
+CREATE SEQUENCE seq_admin_id
     START WITH 1
     INCREMENT BY 1
     CACHE 10
     NOCYCLE;
 
-CREATE TABLE STAFF
-(
-    staff_id   INT,
-    staff_name VARCHAR(30) NOT NULL,
-    gender     VARCHAR(10) NOT NULL,
-    phone      VARCHAR(20) NOT NULL,
-    email      VARCHAR(50),
-    salary     FLOAT,
-    CONSTRAINT pk_staff_id PRIMARY KEY (staff_id),
-    CONSTRAINT regex_staff_phone CHECK ( REGEXP_LIKE(phone, '^\+?[0-9]{4,}$') ),
-    CONSTRAINT regex_staff_email CHECK ( REGEXP_LIKE(email, '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$') OR email IS NULL )
-);
 CREATE TABLE ADMINS
 (
-    admin_id INT,
-    CONSTRAINT fk_admin_id FOREIGN KEY (admin_id) REFERENCES STAFF (staff_id) ON DELETE CASCADE,
-    CONSTRAINT pk_admin_id PRIMARY KEY (admin_id)
+    admin_id     INT,
+    admin_name   VARCHAR(30) NOT NULL,
+    admin_gender VARCHAR(10) NOT NULL,
+    admin_phone  VARCHAR(20),
+    admin_email  VARCHAR(50),
+    admin_salary FLOAT,
+    CONSTRAINT pk_admin_id PRIMARY KEY (admin_id),
+    CONSTRAINT chk_admin_optional_contact CHECK (admin_phone IS NOT NULL OR admin_email IS NOT NULL)
 );
+
+CREATE SEQUENCE seq_employee_id
+    START WITH 1
+    INCREMENT BY 1
+    CACHE 10
+    NOCYCLE;
 CREATE TABLE EMPLOYEES
 (
-    employee_id INT,
-    no_of_sales INT DEFAULT 0 NOT NULL,
-    CONSTRAINT fk_employee_id FOREIGN KEY (employee_id) REFERENCES STAFF (staff_id) ON DELETE CASCADE,
-    CONSTRAINT pk_employee_id PRIMARY KEY (employee_id)
+    employee_id     INT,
+    employee_name   VARCHAR(30)   NOT NULL,
+    employee_gender VARCHAR(10)   NOT NULL,
+    employee_phone  VARCHAR(20),
+    employee_email  VARCHAR(50),
+    employee_salary FLOAT,
+    no_of_sales     INT DEFAULT 0 NOT NULL,
+    CONSTRAINT pk_employee_id PRIMARY KEY (employee_id),
+    CONSTRAINT chk_employee_optional_contact CHECK (employee_email IS NOT NULL OR employee_phone IS NOT NULL)
 );
 
 
@@ -198,68 +203,27 @@ VALUES (seq_pets_id.nextval, 'Girl', 'British Longhair', 'Mina', 7);
 
 
 -- -------------------
--- Full up STAFF table
-INSERT INTO STAFF (staff_id, staff_name, gender, phone, email, salary)
-VALUES (seq_staff_id.nextval, 'Tin Tran', 'Male', '0866364551', 'tintran099@gmail.com', 8600000);
-INSERT INTO STAFF (staff_id, staff_name, gender, phone, email, salary)
-VALUES (seq_staff_id.nextval, 'Trong Huynh', 'Male', '0377723461', 'tronghuynh377@gmail.com', 9000000);
-INSERT INTO STAFF (staff_id, staff_name, gender, phone, email, salary)
-VALUES (seq_staff_id.nextval, 'Minh Le', 'Male', '0987863521', 'sadboyachau112@gmail.com', 86000000);
-INSERT INTO STAFF (staff_id, staff_name, gender, phone, email, salary)
-VALUES (seq_staff_id.nextval, 'Ngoc Nguyen', 'Female', '0326975245', NULL, 90000000);
-INSERT INTO STAFF (staff_id, staff_name, gender, phone, email, salary)
-VALUES (seq_staff_id.nextval, 'Thy Dam', 'Female', '0979631357', NULL, 12000000);
-INSERT INTO STAFF (staff_id, staff_name, gender, phone, email, salary)
-VALUES (seq_staff_id.nextval, 'Som Pham', 'Male', '0965133242', 'contimdaudon666@gmail.com', 9000000);
-INSERT INTO STAFF (staff_id, staff_name, gender, phone, email, salary)
-VALUES (seq_staff_id.nextval, 'Phuoc Nguyen', 'Male', '0397744123', 'phuocnguyen787@gmail.com', 11000000);
-INSERT INTO STAFF (staff_id, staff_name, gender, phone, email, salary)
-VALUES (seq_staff_id.nextval, 'Tien Ly', 'Female', '0328654210', 'tienly1907@gmail.com', 11000000);
-
-
--- --------------------
 -- Fill up ADMINS table
-INSERT INTO ADMINS (admin_id)
-SELECT staff_id
-FROM STAFF
-WHERE staff_name = 'Thy Dam';
-INSERT INTO ADMINS (admin_id)
-SELECT staff_id
-FROM STAFF
-WHERE staff_name = 'Phuoc Nguyen';
-INSERT INTO ADMINS (admin_id)
-SELECT staff_id
-FROM STAFF
-WHERE staff_name = 'Tien Ly';
+INSERT INTO ADMINS (admin_id, admin_name, admin_gender, admin_phone, admin_email, admin_salary)
+VALUES (seq_admin_id.nextval, 'Thy Dam', 'Female', '0979631357', NULL, 12000000);
+INSERT INTO ADMINS (admin_id, admin_name, admin_gender, admin_phone, admin_email, admin_salary)
+VALUES (seq_admin_id.nextval, 'Phuoc Nguyen', 'Male', '0397744123', 'phuocnguyen787@gmail.com', 11000000);
+INSERT INTO ADMINS (admin_id, admin_name, admin_gender, admin_phone, admin_email, admin_salary)
+VALUES (seq_admin_id.nextval, 'Tien Ly', 'Female', '0328654210', 'tienly1907@gmail.com', 11000000);
 
 
--- ----------------------
--- Fill up EMPLOYEE table
-INSERT INTO EMPLOYEES (employee_id, no_of_sales)
-SELECT staff_id,
-       5
-FROM STAFF
-WHERE staff_name = 'Tin Tran';
-INSERT INTO EMPLOYEES (employee_id, no_of_sales)
-SELECT staff_id,
-       10
-FROM STAFF
-WHERE staff_name = 'Trong Huynh';
-INSERT INTO EMPLOYEES (employee_id, no_of_sales)
-SELECT staff_id,
-       12
-FROM STAFF
-WHERE staff_name = 'Minh Le';
-INSERT INTO EMPLOYEES (employee_id, no_of_sales)
-SELECT staff_id,
-       8
-FROM STAFF
-WHERE staff_name = 'Ngoc Nguyen';
-INSERT INTO EMPLOYEES (employee_id, no_of_sales)
-SELECT staff_id,
-       7
-FROM STAFF
-WHERE staff_name = 'Som Pham';
+-- -------------------
+-- Fill up EMPLOYEES table
+INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_phone, employee_salary, no_of_sales)
+VALUES (seq_employee_id.nextval, 'Tin Tran', 'Male', '0866364551', 'tintran099@gmail.com', 8600000, 5);
+INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_phone, employee_salary, no_of_sales)
+VALUES (seq_employee_id.nextval, 'Trong Huynh', 'Male', '0377723461', 'tronghuynh377@gmail.com', 9000000, 10);
+INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_phone, employee_salary, no_of_sales)
+VALUES (seq_employee_id.nextval, 'Minh Le', 'Male', '0987863521', 'sadboyachau112@gmail.com', 8600000, 12);
+INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_phone, employee_salary, no_of_sales)
+VALUES (seq_employee_id.nextval, 'Ngoc Nguyen', 'Female', '0326975245', NULL, 9000000, 8);
+INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_phone, employee_salary, no_of_sales)
+VALUES (seq_employee_id.nextval, 'Som Pham', 'Male', '0965133242', 'contimdaudon666@gmail.com', 9000000, 7);
 
 
 -- --------------------
