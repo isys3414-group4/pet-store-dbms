@@ -67,7 +67,7 @@ CREATE TABLE SERVICES
 
 -- ----------------------------------------
 -- STAFF, ADMINS and EMPLOYEES table schema
-CREATE SEQUENCE seq_admin_id
+CREATE SEQUENCE seq_admins_id
     START WITH 1
     INCREMENT BY 1
     CACHE 10
@@ -85,7 +85,7 @@ CREATE TABLE ADMINS
     CONSTRAINT chk_admin_optional_contact CHECK (admin_phone IS NOT NULL OR admin_email IS NOT NULL)
 );
 
-CREATE SEQUENCE seq_employee_id
+CREATE SEQUENCE seq_employees_id
     START WITH 1
     INCREMENT BY 1
     CACHE 10
@@ -205,25 +205,25 @@ VALUES (seq_pets_id.nextval, 'Girl', 'British Longhair', 'Mina', 7);
 -- -------------------
 -- Fill up ADMINS table
 INSERT INTO ADMINS (admin_id, admin_name, admin_gender, admin_phone, admin_email, admin_salary)
-VALUES (seq_admin_id.nextval, 'Thy Dam', 'Female', '0979631357', NULL, 12000000);
+VALUES (seq_admins_id.nextval, 'Thy Dam', 'Female', '0979631357', NULL, 12000000);
 INSERT INTO ADMINS (admin_id, admin_name, admin_gender, admin_phone, admin_email, admin_salary)
-VALUES (seq_admin_id.nextval, 'Phuoc Nguyen', 'Male', '0397744123', 'phuocnguyen787@gmail.com', 11000000);
+VALUES (seq_admins_id.nextval, 'Phuoc Nguyen', 'Male', '0397744123', 'phuocnguyen787@gmail.com', 11000000);
 INSERT INTO ADMINS (admin_id, admin_name, admin_gender, admin_phone, admin_email, admin_salary)
-VALUES (seq_admin_id.nextval, 'Tien Ly', 'Female', '0328654210', 'tienly1907@gmail.com', 11000000);
+VALUES (seq_admins_id.nextval, 'Tien Ly', 'Female', '0328654210', 'tienly1907@gmail.com', 11000000);
 
 
 -- -------------------
 -- Fill up EMPLOYEES table
-INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_phone, employee_salary, no_of_sales)
-VALUES (seq_employee_id.nextval, 'Tin Tran', 'Male', '0866364551', 'tintran099@gmail.com', 8600000, 5);
-INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_phone, employee_salary, no_of_sales)
-VALUES (seq_employee_id.nextval, 'Trong Huynh', 'Male', '0377723461', 'tronghuynh377@gmail.com', 9000000, 10);
-INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_phone, employee_salary, no_of_sales)
-VALUES (seq_employee_id.nextval, 'Minh Le', 'Male', '0987863521', 'sadboyachau112@gmail.com', 8600000, 12);
-INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_phone, employee_salary, no_of_sales)
-VALUES (seq_employee_id.nextval, 'Ngoc Nguyen', 'Female', '0326975245', NULL, 9000000, 8);
-INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_phone, employee_salary, no_of_sales)
-VALUES (seq_employee_id.nextval, 'Som Pham', 'Male', '0965133242', 'contimdaudon666@gmail.com', 9000000, 7);
+INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_email, employee_salary, no_of_sales)
+VALUES (seq_employees_id.nextval, 'Tin Tran', 'Male', '0866364551', 'tintran099@gmail.com', 8600000, 5);
+INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_email, employee_salary, no_of_sales)
+VALUES (seq_employees_id.nextval, 'Trong Huynh', 'Male', '0377723461', 'tronghuynh377@gmail.com', 9000000, 10);
+INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_email, employee_salary, no_of_sales)
+VALUES (seq_employees_id.nextval, 'Minh Le', 'Male', '0987863521', 'sadboyachau112@gmail.com', 8600000, 12);
+INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_email, employee_salary, no_of_sales)
+VALUES (seq_employees_id.nextval, 'Ngoc Nguyen', 'Female', '0326975245', NULL, 9000000, 8);
+INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_email, employee_salary, no_of_sales)
+VALUES (seq_employees_id.nextval, 'Som Pham', 'Male', '0965133242', 'contimdaudon666@gmail.com', 9000000, 7);
 
 
 -- --------------------
@@ -231,7 +231,7 @@ VALUES (seq_employee_id.nextval, 'Som Pham', 'Male', '0965133242', 'contimdaudon
 INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
 VALUES (seq_orders_id.nextval, TIMESTAMP '2022-07-29 08:15:30.11', 7, 12, 2, 1, 360000, 0);
 INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
-VALUES (seq_orders_id.nextval, TIMESTAMP '2022-07-30 13:02:45.23', 10, 3, 6, 3, 120000, 12000);
+VALUES (seq_orders_id.nextval, TIMESTAMP '2022-07-30 13:02:45.23', 10, 3, 4, 3, 120000, 12000);
 INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
 VALUES (seq_orders_id.nextval, TIMESTAMP'2022-07-31 09:15:20.20', 2, 1, 3, 5, 95000, 0);
 INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
