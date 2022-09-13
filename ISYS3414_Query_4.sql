@@ -95,10 +95,12 @@ WHERE E.employee_id = O.employee_id
 ORDER BY incentive DESC;
 
 -- Employees: Pairs of employees having the same manager will work together
-SELECT DISTINCT E1.employee_id, E1.employee_name, E2.employee_id, E2.employee_name
+SELECT DISTINCT E1.employee_id, E1.employee_name, E2.employee_id, E2.employee_name, A.admin_name
 FROM EMPLOYEES E1,
-     EMPLOYEES E2
+     EMPLOYEES E2,
+     ADMINS A
 WHERE E1.manager_id = E2.manager_id
+  AND A.admin_id = E1.manager_id
   AND E1.employee_id > E2.employee_id;
 
 -- Pets: Pet Id, name of pets and name of services that each pet uses regularly
@@ -127,6 +129,6 @@ SELECT E.employee_id,
 FROM EMPLOYEES E,
      ORDERS O
 WHERE E.employee_id = O.employee_id
-  AND E.starting_date BETWEEN '01-JAN-2022' AND '01-AUG-2022'
+  AND E.starting_date BETWEEN DATE '2022-01-01' AND DATE '2022-08-01'
 GROUP BY E.employee_id, E.employee_name, (E.employee_salary + 1000000)
 ORDER BY orders_processed;
