@@ -9,7 +9,8 @@ SELECT C.customer_id,
        COUNT(O.order_id) AS orders
 FROM CUSTOMERS C,
      ORDERS O
-WHERE C.customer_id = O.customer_id AND ROWNUM <= 5
+WHERE C.customer_id = O.customer_id
+  AND ROWNUM <= 5
 GROUP BY C.customer_id, C.first_name, C.last_name, C.email, C.phone, C.membership, C.royalty_points
 ORDER BY orders DESC;
 
@@ -22,7 +23,7 @@ GROUP BY C.membership;
 SELECT S.service_id, S.service_name, S.service_description, S.list_price, COUNT(O.order_id) AS orders
 FROM SERVICES S,
      ORDERS O
-WHERE S.service_id = O.service_id
+WHERE S.service_id = O.service_id AND ROWNUM <= 5
 GROUP BY S.service_id, S.service_name, S.service_description, S.list_price
 ORDER BY orders DESC;
 
@@ -33,20 +34,18 @@ FROM SERVICES S,
 WHERE S.service_id = O.service_id
 GROUP BY S.service_name, S.service_id;
 
--- Employees: Top employees
+- Employees: Top employees
 SELECT E.employee_id, S.staff_name, E.no_of_sales
 FROM EMPLOYEES E,
      STAFF S
 WHERE S.staff_id = E.employee_id
 GROUP BY S.staff_name, E.employee_id, E.no_of_sales
-ORDER BY E.no_of_sales DESC;
+ORDER BY E.no_of_sales DESC;-
 
 -- Employees: Sales statistics
-SELECT E.employee_id, S.staff_name, E.no_of_sales
-FROM EMPLOYEES E,
-     STAFF S
-WHERE S.staff_id = E.employee_id
-GROUP BY S.staff_name, E.employee_id, E.no_of_sales;
+SELECT E.employee_id, E.employee_name, E.no_of_sales
+FROM EMPLOYEES E
+GROUP BY E.employee_id, E.employee_name, E.no_of_sales;
 
 -- Orders: Revenue
 SELECT TO_CHAR(O.date_time, 'YYYY-MM-DD') AS sales_date, SUM(DISTINCT O.amount_paid) AS revenue
@@ -60,14 +59,13 @@ FROM ORDERS O
 GROUP BY TO_CHAR(O.date_time, 'fmDay'), MOD(TO_CHAR(O.date_time, 'D') + 5, 7)
 ORDER BY MOD(TO_CHAR(O.date_time, 'D') + 5, 7);
 
--- Staff: Gender proportion
-SELECT S.GENDER, COUNT(*) AS quantity
-FROM EMPLOYEES E, STAFF S
-WHERE E.EMPLOYEE_ID = S.STAFF_ID
-GROUP BY gender;
+-- Employees: Gender proportion
+SELECT E.EMPLOYEE_GENDER, COUNT(*) AS QUANTITY
+FROM EMPLOYEES E
+GROUP BY E.EMPLOYEE_GENDER;
 
 -- Staff: Staff that has salary above average
-SELECT S.staff_name, S.salary
-FROM STAFF S
-WHERE S.salary >= (SELECT AVG(salary)
-                  FROM STAFF)
+SELECT E.EMPLOYEE_ID, E.EMPLOYEE_NAME, E.EMPLOYEE_SALARY
+FROM EMPLOYEES E
+WHERE E.EMPLOYEE_SALARY >= (SELECT AVG(E.EMPLOYEE_SALARY)
+                            FROM EMPLOYEES);

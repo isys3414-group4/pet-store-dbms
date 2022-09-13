@@ -92,14 +92,17 @@ CREATE SEQUENCE seq_employees_id
     NOCYCLE;
 CREATE TABLE EMPLOYEES
 (
-    employee_id     INT,
-    employee_name   VARCHAR(30)   NOT NULL,
-    employee_gender VARCHAR(10)   NOT NULL,
-    employee_phone  VARCHAR(20),
-    employee_email  VARCHAR(50),
-    employee_salary FLOAT,
-    no_of_sales     INT DEFAULT 0 NOT NULL,
+    employee_id        INT,
+    employee_name      VARCHAR(30) NOT NULL,
+    employee_gender    VARCHAR(10) NOT NULL,
+    employee_birthdate DATE,
+    employee_phone     VARCHAR(20),
+    employee_email     VARCHAR(50),
+    employee_salary    FLOAT,
+    starting_date      DATE,
+    manager_id         INT         NOT NULL,
     CONSTRAINT pk_employee_id PRIMARY KEY (employee_id),
+    CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES ADMINS (admin_id) ON DELETE CASCADE,
     CONSTRAINT chk_employee_optional_contact CHECK (employee_email IS NOT NULL OR employee_phone IS NOT NULL)
 );
 
@@ -123,6 +126,7 @@ CREATE TABLE ORDERS
     price       FLOAT     NOT NULL,
     discount    FLOAT,
     amount_paid FLOAT GENERATED ALWAYS AS (price - discount),
+    tip         FLOAT,
     CONSTRAINT pk_order_id PRIMARY KEY (order_id),
     CONSTRAINT fk_order_customer_id FOREIGN KEY (customer_id) REFERENCES CUSTOMERS (customer_id) ON DELETE CASCADE,
     CONSTRAINT fk_order_pet_id FOREIGN KEY (pet_id) REFERENCES PETS (pet_id) ON DELETE CASCADE,
@@ -208,43 +212,74 @@ INSERT INTO ADMINS (admin_id, admin_name, admin_gender, admin_phone, admin_email
 VALUES (seq_admins_id.nextval, 'Thy Dam', 'Female', '0979631357', NULL, 12000000);
 INSERT INTO ADMINS (admin_id, admin_name, admin_gender, admin_phone, admin_email, admin_salary)
 VALUES (seq_admins_id.nextval, 'Phuoc Nguyen', 'Male', '0397744123', 'phuocnguyen787@gmail.com', 11000000);
-INSERT INTO ADMINS (admin_id, admin_name, admin_gender, admin_phone, admin_email, admin_salary)
-VALUES (seq_admins_id.nextval, 'Tien Ly', 'Female', '0328654210', 'tienly1907@gmail.com', 11000000);
 
 
 -- -------------------
 -- Fill up EMPLOYEES table
-INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_email, employee_salary, no_of_sales)
-VALUES (seq_employees_id.nextval, 'Tin Tran', 'Male', '0866364551', 'tintran099@gmail.com', 8600000, 5);
-INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_email, employee_salary, no_of_sales)
-VALUES (seq_employees_id.nextval, 'Trong Huynh', 'Male', '0377723461', 'tronghuynh377@gmail.com', 9000000, 10);
-INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_email, employee_salary, no_of_sales)
-VALUES (seq_employees_id.nextval, 'Minh Le', 'Male', '0987863521', 'sadboyachau112@gmail.com', 8600000, 12);
-INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_email, employee_salary, no_of_sales)
-VALUES (seq_employees_id.nextval, 'Ngoc Nguyen', 'Female', '0326975245', NULL, 9000000, 8);
-INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_phone, employee_email, employee_salary, no_of_sales)
-VALUES (seq_employees_id.nextval, 'Som Pham', 'Male', '0965133242', 'contimdaudon666@gmail.com', 9000000, 7);
+INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_birthdate, employee_phone, employee_email,
+                       employee_salary, starting_date, manager_id)
+VALUES (seq_employees_id.nextval, 'Tin Tran', 'Male', '18-JUL-2003', '0866364551', 'tintran099@gmail.com', 9000000,
+        '15-JAN-2021', 1);
+INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_birthdate, employee_phone, employee_email,
+                       employee_salary, starting_date, manager_id)
+VALUES (seq_employees_id.nextval, 'Trong Huynh', 'Male', '12-APR-1997', '0377723461', 'tronghuynh377@gmail.com',
+        5000000,
+        '13-FEB-2022', 1);
+INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_birthdate, employee_phone, employee_email,
+                       employee_salary, starting_date, manager_id)
+VALUES (seq_employees_id.nextval, 'Minh Le', 'Male', '23-SEP-2000', '0987863521', 'sadboyachau112@gmail.com', 900000,
+        '21-MAY-2021', 2);
+INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_birthdate, employee_phone, employee_email,
+                       employee_salary, starting_date, manager_id)
+VALUES (seq_employees_id.nextval, 'Ngoc Nguyen', 'Female', '16-SEP-2001', '0326975245', NULL, 7000000, '24-DEC-2021',
+        1);
+INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_birthdate, employee_phone, employee_email,
+                       employee_salary, starting_date, manager_id)
+VALUES (seq_employees_id.nextval, 'Som Pham', 'Male', '25-AUG-2000', '0965133242', 'contimdaudon666@gmail.com', 5000000,
+        '23-MAY-2022', 2);
+INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_birthdate, employee_phone, employee_email,
+                       employee_salary, starting_date, manager_id)
+VALUES (seq_employees_id.nextval, 'Tien Ly', 'Female', '19-OCT-2002', '0328654210', 'tienly1907@gmail.com', 7000000,
+        '13-OCT-2021', 2);
 
 
 -- --------------------
 -- Fill up ORDERS table
-INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
-VALUES (seq_orders_id.nextval, TIMESTAMP '2022-07-29 08:15:30.11', 7, 12, 2, 1, 360000, 0);
-INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
-VALUES (seq_orders_id.nextval, TIMESTAMP '2022-07-30 13:02:45.23', 10, 3, 4, 3, 120000, 12000);
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount, tip)
+VALUES (seq_orders_id.nextval, TIMESTAMP '2022-07-29 08:15:30.11', 7, 12, 2, 1, 360000, 0, 50000);
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount, tip)
+VALUES (seq_orders_id.nextval, TIMESTAMP '2022-07-30 13:02:45.23', 10, 3, 4, 3, 120000, 12000, 15000);
 INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
 VALUES (seq_orders_id.nextval, TIMESTAMP'2022-07-31 09:15:20.20', 2, 1, 3, 5, 95000, 0);
-INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
-VALUES (seq_orders_id.nextval, TIMESTAMP'2022-08-01 12:20:32.12', 7, 12, 3, 5, 95000, 9500);
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount, tip)
+VALUES (seq_orders_id.nextval, TIMESTAMP'2022-08-01 12:20:32.12', 7, 12, 3, 5, 95000, 9500, 5000);
 INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
 VALUES (seq_orders_id.nextval, TIMESTAMP'2022-08-01 14:35:30.40', 9, 8, 1, 6, 75000, 0);
 INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
 VALUES (seq_orders_id.nextval, TIMESTAMP'2022-08-01 15:30:45.24', 3, 11, 4, 4, 75000, 0);
-INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
-VALUES (seq_orders_id.nextval, TIMESTAMP'2022-08-02 10:46:56.12', 5, 9, 3, 2, 150000, 15000);
-INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
-VALUES (seq_orders_id.nextval, TIMESTAMP'2022-08-03 14:20:23.50', 7, 12, 1, 1, 360000, 0);
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount, tip)
+VALUES (seq_orders_id.nextval, TIMESTAMP'2022-08-02 10:46:56.12', 5, 9, 3, 2, 150000, 15000, 15000);
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount, tip)
+VALUES (seq_orders_id.nextval, TIMESTAMP'2022-08-03 14:20:23.50', 7, 12, 1, 1, 360000, 0, 50000);
 INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
 VALUES (seq_orders_id.nextval, TIMESTAMP '2022-08-04 08:15:19.20', 8, 6, 3, 5, 95000, 0);
 INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
 VALUES (seq_orders_id.nextval, TIMESTAMP '2022-08-04 13:15:12.20', 4, 10, 4, 1, 360000, 36000);
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount, tip)
+VALUES (seq_orders_id.nextval, TIMESTAMP '2022-08-05 8:00:12.20', 1, 12, 2, 5, 95000, 20000, 15000);
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount, tip)
+VALUES (seq_orders_id.nextval, TIMESTAMP '2022-08-05 15:30:22.20', 7, 12, 1, 2, 150000, 0, 50000);
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
+VALUES (seq_orders_id.nextval, TIMESTAMP '2022-08-05 15:46:13.20', 6, 2, 4, 1, 360000, 36000);
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount, tip)
+VALUES (seq_orders_id.nextval, TIMESTAMP '2022-08-06 10:18:22.59', 8, 6, 6, 4, 75000, 0, 12000);
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount, tip)
+VALUES (seq_orders_id.nextval, TIMESTAMP '2022-08-06 12:15:12.26', 5, 9, 2, 3, 120000, 12000, 5000);
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount, tip)
+VALUES (seq_orders_id.nextval, TIMESTAMP '2022-08-07 09:15:12.50', 10, 3, 6, 1, 360000, 36000, 10000);
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount, tip)
+VALUES (seq_orders_id.nextval, TIMESTAMP '2022-08-07 13:19:01.00', 7, 12, 3, 5, 95000, 9500, 35000);
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
+VALUES (seq_orders_id.nextval, TIMESTAMP '2022-08-07 16:15:46.20', 2, 4, 4, 2, 150000, 15000);
+INSERT INTO ORDERS(order_id, date_time, customer_id, pet_id, employee_id, service_id, price, discount)
+VALUES (seq_orders_id.nextval, TIMESTAMP '2022-08-08 10:15:12.20', 4, 10, 4, 1, 360000, 36000);
