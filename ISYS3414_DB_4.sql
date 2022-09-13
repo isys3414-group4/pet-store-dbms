@@ -218,29 +218,29 @@ VALUES (seq_admins_id.nextval, 'Phuoc Nguyen', 'Male', '0397744123', 'phuocnguye
 -- Fill up EMPLOYEES table
 INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_birthdate, employee_phone, employee_email,
                        employee_salary, starting_date, manager_id)
-VALUES (seq_employees_id.nextval, 'Tin Tran', 'Male', '18-JUL-2003', '0866364551', 'tintran099@gmail.com', 9000000,
-        '15-JAN-2021', 1);
+VALUES (seq_employees_id.nextval, 'Tin Tran', 'Male', DATE '2003-07-18', '0866364551', 'tintran099@gmail.com', 9000000,
+        DATE '2021-01-15', 1);
 INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_birthdate, employee_phone, employee_email,
                        employee_salary, starting_date, manager_id)
-VALUES (seq_employees_id.nextval, 'Trong Huynh', 'Male', '12-APR-1997', '0377723461', 'tronghuynh377@gmail.com',
+VALUES (seq_employees_id.nextval, 'Trong Huynh', 'Male', DATE '1997-04-12', '0377723461', 'tronghuynh377@gmail.com',
         5000000,
-        '13-FEB-2022', 1);
+        DATE '2022-02-13', 1);
 INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_birthdate, employee_phone, employee_email,
                        employee_salary, starting_date, manager_id)
-VALUES (seq_employees_id.nextval, 'Minh Le', 'Male', '23-SEP-2000', '0987863521', 'sadboyachau112@gmail.com', 900000,
-        '21-MAY-2021', 2);
+VALUES (seq_employees_id.nextval, 'Minh Le', 'Male', DATE '2000-09-23', '0987863521', 'sadboyachau112@gmail.com', 900000,
+        DATE '2021-05-21', 2);
 INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_birthdate, employee_phone, employee_email,
                        employee_salary, starting_date, manager_id)
-VALUES (seq_employees_id.nextval, 'Ngoc Nguyen', 'Female', '16-SEP-2001', '0326975245', NULL, 7000000, '24-DEC-2021',
+VALUES (seq_employees_id.nextval, 'Ngoc Nguyen', 'Female', DATE '2001-09-16', '0326975245', NULL, 7000000, DATE '2021-12-24',
         1);
 INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_birthdate, employee_phone, employee_email,
                        employee_salary, starting_date, manager_id)
-VALUES (seq_employees_id.nextval, 'Som Pham', 'Male', '25-AUG-2000', '0965133242', 'contimdaudon666@gmail.com', 5000000,
-        '23-MAY-2022', 2);
+VALUES (seq_employees_id.nextval, 'Som Pham', 'Male', DATE '2000-08-25', '0965133242', 'contimdaudon666@gmail.com', 5000000,
+        DATE '2022-05-13', 2);
 INSERT INTO EMPLOYEES (employee_id, employee_name, employee_gender, employee_birthdate, employee_phone, employee_email,
                        employee_salary, starting_date, manager_id)
-VALUES (seq_employees_id.nextval, 'Tien Ly', 'Female', '19-OCT-2002', '0328654210', 'tienly1907@gmail.com', 7000000,
-        '13-OCT-2021', 2);
+VALUES (seq_employees_id.nextval, 'Tien Ly', 'Female', DATE '2002-10-19', '0328654210', 'tienly1907@gmail.com', 7000000,
+        DATE '2021-10-13', 2);
 
 
 -- --------------------
